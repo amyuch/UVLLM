@@ -23,7 +23,7 @@ openai.api_key = API_KEY
 
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"), base_url=os.environ.get("OPENAI_API_BASE"))
 
-def get_completion(prompt, model="gpt-4-turbo", temperature=0.2):
+def get_completion(prompt, model="gpt-4.1-nano", temperature=0.2):
     res = ''
     try:
         response = client.chat.completions.create(
