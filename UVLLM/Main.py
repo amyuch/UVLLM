@@ -93,10 +93,19 @@ def test_mismatch(logger, benchmark, bugInfo, working_dir, max_i):
                 break    
             else:
                 logger.error("Bad fix. Roll back to the previous version.")
-                with open(patch_dir/f"{src.split('.')[0]}_{i-1}.v", 'r') as back: #rollback to the previous version
-                    with open(Path("".join(bugInfo["src_file"])), 'w') as codepath:
-                        backup = back.read()
-                        codepath.write(backup)
+                # 获取patch_dir和src
+                patch_dir = os.path.join(os.path.dirname(bugInfo["src_file"][0]), "2_SuspiciousLine")
+                src = os.path.basename(bugInfo["src_file"][0])
+                rollback_path = os.path.join(patch_dir, f"{src.split('.')[0]}_{i-1}.v")
+                if os.path.exists(rollback_path):
+                    with open(rollback_path, 'r') as back: #rollback to the previous version
+                        with open(bugInfo["src_file"][0], 'w') as codepath:
+                            backup = back.read()
+                            codepath.write(backup)
+                else:
+                    from utils.TerminalUtils import print_result
+                    logger.error(f"Rollback file not found: {rollback_path}")
+                    print_result(False, "回滚失败，补丁文件不存在", str(rollback_path))
     end_time= time.time()
     total_time = end_time - start_time
     mismatch_time = total_time - preprocess_time

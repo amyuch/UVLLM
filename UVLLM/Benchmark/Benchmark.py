@@ -25,9 +25,11 @@ class Benchmark:
                 self.bugInfoDict[k] = json.loads(v)
             elif v.startswith('['):
                 vlist = json.loads(v)
-                self.bugInfoDict[k] = [os.path.join(Config.BENCHMARKS, v) for v in vlist]
+                # 修复路径处理逻辑：确保不会重复拼接目录
+                self.bugInfoDict[k] = [os.path.join(Config.PROJECT_PATH, v) for v in vlist]
             else:
-                self.bugInfoDict[k] = os.path.join(Config.BENCHMARKS, v)
+                # 修复路径处理逻辑：确保不会重复拼接目录
+                self.bugInfoDict[k] = os.path.join(Config.PROJECT_PATH, v)
         return self.bugInfoDict
     
     def getAllBugs(self):

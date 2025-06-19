@@ -1,10 +1,10 @@
 import os, json, copy
-from func_timeout import func_set_timeout
+# from func_timeout import func_set_timeout
 import Config
 from utils import FileUtils, StringUtils, Logger
 from VerilogAnalyzer import VcdAnalyzer, SignalAnalyzer, AstAnalyzer, DataFlowAnalyzer
 from Locator.Locator import Locator
-from Adapter.Adapter import Adapter
+# from Adapter.Adapter import Adapter
 
 import difflib
 def string_similar(s1, s2):

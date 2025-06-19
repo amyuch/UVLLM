@@ -4,8 +4,8 @@ from vcd.reader import TokenKind, tokenize, ScopeDecl
 logger = logging.getLogger()
 
 def computeUnitLevel(tsUnit, tsPrecision):
-    tsUnitMatch = re.match("(\d+)(\w+)", tsUnit)
-    tsPrecisionMatch = re.match("(\d+)(\w+)", tsPrecision)
+    tsUnitMatch = re.match(r"(\d+)(\w+)", tsUnit)
+    tsPrecisionMatch = re.match(r"(\d+)(\w+)", tsPrecision)
     tsu1, tsu2 = int(tsUnitMatch[1]), tsUnitMatch[2]
     tsp1, tsp2 = int(tsPrecisionMatch[1]), tsPrecisionMatch[2]
     UnifiedUnitToNanoSecond = {"s":1000000, "ms": 1000, "ns": 1, "ps": 0.001, "fs": 0.000001}

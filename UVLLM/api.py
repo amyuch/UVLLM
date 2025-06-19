@@ -12,10 +12,16 @@ from openai import OpenAI
 import logging
 
 os.environ["OPENAI_API_BASE"] = "https://api.openai.com/v1"
-os.environ["OPENAI_API_KEY"] = "your_api_key_here"
 
-client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"),
-                base_url=os.environ.get("OPENAI_API_BASE"))
+# Retrieve API key from environment variable
+API_KEY = os.getenv('OPENAI_API_KEY')
+if not API_KEY:
+    raise ValueError("Environment variable 'OPENAI_API_KEY' is not set.")
+
+# Initialize OpenAI client
+openai.api_key = API_KEY
+
+client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"), base_url=os.environ.get("OPENAI_API_BASE"))
 
 def get_completion(prompt, model="gpt-4-turbo", temperature=0.2):
     res = ''

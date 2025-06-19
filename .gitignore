@@ -1,0 +1,48 @@
+# Python-related files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+*.env
+*.venv
+venv/
+ENV/
+.env
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Logs
+logs/
+*.log
+
+# Virtual environment
+venv/
+
+# Cache files
+.cache/
+*.cache
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+
+# Patch files
+patch/
+
+# Workdir
+workdir/
+
+# Verilator build files
+verilator/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/

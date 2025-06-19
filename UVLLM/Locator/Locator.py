@@ -185,18 +185,19 @@ class Locator:
         for eps, bds, ars in zip(self.executedPaths, self.spsBindDicts, self.availableRenameInfo):
             for ep, bd, ar in zip(eps, bds, ars):
                 if bd.alwaysinfo != None:
-                    if bd.alwaysinfo.clock != None:
+                    if hasattr(bd.alwaysinfo, "clock") and bd.alwaysinfo.clock != None:
                         sNodeIds = self.getAllNodeId(bd.alwaysinfo.clock)
                         for sNodeId in sNodeIds:
                             spsNodeIds.add(sNodeId)
-                    if bd.alwaysinfo.reset != None:
+                    if hasattr(bd.alwaysinfo, "reset") and bd.alwaysinfo.reset != None:
                         sNodeIds = self.getAllNodeId(bd.alwaysinfo.reset)
                         for sNodeId in sNodeIds:
                             spsNodeIds.add(sNodeId)
-                    for sens in bd.alwaysinfo.senslist:
-                        sNodeIds = self.getAllNodeId(sens)
-                        for sNodeId in sNodeIds:
-                            spsNodeIds.add(sNodeId)
+                    if hasattr(bd.alwaysinfo, "senslist"):
+                        for sens in bd.alwaysinfo.senslist:
+                            sNodeIds = self.getAllNodeId(sens)
+                            for sNodeId in sNodeIds:
+                                spsNodeIds.add(sNodeId)
                 self.spsNodes = []
                 self.collectSuspiciousNode(bd.tree, ep)
                 for spsNode in self.spsNodes:
